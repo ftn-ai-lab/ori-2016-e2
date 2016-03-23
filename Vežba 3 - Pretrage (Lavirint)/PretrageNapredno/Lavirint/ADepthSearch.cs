@@ -7,6 +7,6 @@ namespace Lavirint
 {
     class ADepthSearch
     {
-        //TODO5: Implementirati klasu koja kombinuje algoritme Prvi u dubinu i A*
+        //TODO 5: Implementirati klasu koja kombinuje algoritme Prvi u dubinu i A*
     }
 }

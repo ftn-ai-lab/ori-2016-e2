@@ -16,13 +16,14 @@ namespace Lavirint
             while (stanjaZaObradu.Count > 0)
             {
                 State naObradi = getBest(stanjaZaObradu);
-                if (naObradi.isKrajnjeStanje())
-                {
-                    return naObradi;
-                }
 
                 if (!predjeniPut.ContainsKey(naObradi.GetHashCode()))
                 {
+                    Main.allSearchStates.Add(naObradi);
+                    if (naObradi.isKrajnjeStanje())
+                    {
+                        return naObradi;
+                    }
                     predjeniPut.Add(naObradi.GetHashCode(),null);
                     List<State> sledecaStanja = naObradi.mogucaSledecaStanja();
 
