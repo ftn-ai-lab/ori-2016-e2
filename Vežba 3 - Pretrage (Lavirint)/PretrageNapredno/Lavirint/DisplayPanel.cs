@@ -24,6 +24,7 @@ namespace Lavirint
 
        
         public String[][] lavirintPoruke;
+        private bool[,] visited;
         public int X, Y;
         public int iconI = 0;
         public int iconJ = 0;
@@ -35,6 +36,16 @@ namespace Lavirint
             {
                 lavirintPoruke[i] = new String[Main.brojKolona];
             }
+        }
+
+        public void resetLavirintPoseceno()
+        {
+            visited = new bool[Main.brojVrsta, Main.brojKolona];
+        }
+
+        public void poseceno(State state)
+        {
+            visited[state.markI, state.markJ] = true;
         }
 
         //TODO 3.1: Prosiriti metodu tako da se napravi novi Color objekat npr: Color.MediumBlue
@@ -81,6 +92,11 @@ namespace Lavirint
                     Rectangle r = new Rectangle(dx * j + 2, dy * i + 2, dx - 4, dy - 4);
                     Color cc1 = Color.FromArgb(100, Color.White);
                     Color cc2 = Color.FromArgb(100, Color.White);
+                    if (visited[i, j])
+                    {
+                        cc1 = Color.FromArgb(100, Color.Aquamarine);
+                        cc2 = Color.FromArgb(20, Color.Aquamarine);
+                    }
                     if (i == X && j == Y)
                     {
                         cc1 = Color.FromArgb(100, Color.YellowGreen);
@@ -172,7 +188,7 @@ namespace Lavirint
             InvalidateAdv(i, j);
         }
 
-        protected void moveIcon(int dI, int dJ) { 
+        public void moveIcon(int dI, int dJ) { 
             int nI = iconI+dI;
             int nJ = iconJ + dJ;
             if (nI < 0)

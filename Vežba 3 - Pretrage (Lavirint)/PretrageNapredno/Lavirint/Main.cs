@@ -9,12 +9,14 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Collections;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Lavirint
 {
     public partial class Main : Form
     {
         public static int brojVrsta = 10, brojKolona = 10;
+        public static List<State> allSearchStates;
         public Main()
         {
             InitializeComponent();
@@ -65,6 +67,8 @@ namespace Lavirint
 
         private void inicijalizacijaPretrage() {
             displayPanel1.resetLavirintPoruke();
+            displayPanel1.resetLavirintPoseceno();
+            allSearchStates = new List<State>();
             for (int i = 0; i < Main.brojVrsta; i++)
             {
                 for (int j = 0; j < Main.brojKolona; j++)
@@ -89,6 +93,7 @@ namespace Lavirint
         List<State> resenje = new List<State>();
         private void btnResenje_Click(object sender, EventArgs e)
         {
+            displayPanel1.resetLavirintPoseceno();
             displayPanel1.resetLavirintPoruke();
             // nacrtati resenje
             int i = 0;
@@ -167,8 +172,27 @@ namespace Lavirint
             inicijalizacijaPretrage();
             ADepthSearch aDepth = new ADepthSearch();
             State sp = pocetnoStanje;
-            //TODO6: Pozvati odgovarajuce metode ADepthSearch klase
+            //TODO 6: Pozvati odgovarajuce metode ADepthSearch klase
             displayPanel1.Refresh();
+        }
+
+        private void showSearchPath_Click(object sender, EventArgs e)
+        {
+            displayPanel1.resetLavirintPoseceno();
+            foreach (State state in allSearchStates)
+            {
+                displayPanel1.resetLavirintPoruke();
+                displayPanel1.poseceno(state);
+                int i = 0;
+                foreach (State r in state.path())
+                {
+                    displayPanel1.lavirintPoruke[r.markI][r.markJ] += " " + i;
+                    i++;
+                }
+                displayPanel1.moveIcon(state.markI - displayPanel1.iconI, state.markJ - displayPanel1.iconJ);
+                displayPanel1.Refresh();
+                Thread.Sleep(500);
+            }
         }
     }
 }
