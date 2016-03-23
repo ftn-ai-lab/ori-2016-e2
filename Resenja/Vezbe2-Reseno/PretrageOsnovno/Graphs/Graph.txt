@@ -1,0 +1,8 @@
+put:NS,BG,90
+put:NS,SB,70
+put:SB,UZ,80
+put:BG,UZ,90
+put:BG,KR,110
+put:UZ,KR,40
+put:UZ,NI,190
+put:KR,NI,120

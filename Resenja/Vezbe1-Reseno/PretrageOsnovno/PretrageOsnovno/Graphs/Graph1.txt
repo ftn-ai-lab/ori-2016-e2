@@ -1,0 +1,8 @@
+veza:a,b
+veza:a,c
+veza:a,d
+veza:b,e
+veza:b,f
+veza:c,g
+veza:c,h
+veza:d,j
