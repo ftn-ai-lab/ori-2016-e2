@@ -7,14 +7,14 @@ namespace NaiveBayes
 {
     public class NaiveBayes
     {
-        Dictionary<int, double> sentiment_words_count = new Dictionary<int, double>();
+        Dictionary<int, double> documents_sentiment_count = new Dictionary<int, double>();
         public static Dictionary<string, int> vocabulary = new Dictionary<string, int>();
         public static Dictionary<int, Dictionary<string, int>> word_counts = new Dictionary<int, Dictionary<string, int>>();
 
         public NaiveBayes()
         {
-            sentiment_words_count[0] = 0.0;
-            sentiment_words_count[1] = 0.0;
+            documents_sentiment_count[0] = 0.0;
+            documents_sentiment_count[1] = 0.0;
             word_counts[0] = new Dictionary<string, int>();
             word_counts[1] = new Dictionary<string, int>();
         }
@@ -29,7 +29,7 @@ namespace NaiveBayes
                 string text = model.Text[i];
                 int sentiment = model.Sentiment[i];
 
-                sentiment_words_count[sentiment] += 1;
+                documents_sentiment_count[sentiment] += 1;
                 string[] words = TextUtil.Tokenize(text);
                 Dictionary<string, int> counts = TextUtil.CountWords(words);
 
@@ -52,8 +52,8 @@ namespace NaiveBayes
             string[] words = TextUtil.Tokenize(text);
             var counts = TextUtil.CountWords(words);
 
-            double wordCount = sentiment_words_count.Values.Sum();
-            //TODO 6 - Izracunati verovatnoce da je rec pozitivnog ili negativnog sentimenta - P(cj)
+            double documentCount = documents_sentiment_count.Values.Sum();
+            //TODO 6 - Izracunati verovatnoce da je dokument za predikciju bas pozitivnog ili negativnog sentimenta - P(cj)
             double Pcj_neg;
             double Pcj_pos;
 
