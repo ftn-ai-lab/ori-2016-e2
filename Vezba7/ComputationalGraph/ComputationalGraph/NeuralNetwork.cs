@@ -74,7 +74,7 @@ namespace ComputationalGraph
                         double output = predicted[j];
                         double target = y[j];
                         //opadajuci gradijent
-                        total_loss += Math.Pow((target - 0), 2);
+                        total_loss += Math.Pow((target - output), 2);
                         grad += -(target - output);
                     }
                     List<List<double>> gradient = new List<List<double>>() { new List<double>(){grad} };
